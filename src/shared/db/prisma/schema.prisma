@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum ECategories {
+  Bug 
+  Feature 
+  Documentation 
+  Refactor 
+  Test
+}
+
+model categories {
+  id   Int    @id @default(autoincrement())
+  name ECategories 
+
+  tasks tasks[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+enum EStatus {
+  ToDo
+  InProgress
+  Done
+}
+
+enum EPriority {
+  Low
+  Medium
+  High
+}
+
+model tasks {
+  task_id     Int       @id @default(autoincrement())
+  category_id Int? 
+  title       String    @db.VarChar(255)
+  description String?   @db.Text
+  status      EStatus
+  priority    EPriority?
+
+  category categories? @relation(fields: [category_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
