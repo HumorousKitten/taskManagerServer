@@ -13,8 +13,8 @@
     "paths": {
       "@app/*": ["app/*"],
       "@entities/*": ["entities/*"],
-      "@shared/*": ["feature/*"],
-      "@feature/*": ["shared/*"],
+      "@shared/*": ["shared/*"],
+      "@feature/*": ["feature/*"],
     }
   }
 }

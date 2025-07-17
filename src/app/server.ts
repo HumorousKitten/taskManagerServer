@@ -1,9 +1,11 @@
 import express from 'express'
 import dotenv from 'dotenv'
 
-import { notFound, errorHandler } from '../shared/middleware/error.middleware'
+import { notFound, errorHandler } from '@shared/middleware/error.middleware'
 
-import { prisma } from '../shared/db/prisma/prisma'
+import { prisma } from '@shared/db/prisma/prisma'
+
+import {getTasksRoutes} from '@feature/index'
 
 dotenv.config()
 
@@ -14,6 +16,7 @@ async function main() {
 
 	const PORT = process.env.port || 5000
 
+	app.use('/', getTasksRoutes)
 
 	app.use(notFound)
 	app.use(errorHandler)
