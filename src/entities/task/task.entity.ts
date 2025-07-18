@@ -1,7 +1,10 @@
+import { EStatus } from '@prisma/client'
+
 export class TaskEntity {
 	constructor(
-		public id: number | null,
 		public title: string,
+		public status: EStatus,
+		public id?: number,
 	){
 		this.validateTitle(title)
 	}
