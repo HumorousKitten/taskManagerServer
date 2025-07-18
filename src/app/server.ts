@@ -1,11 +1,11 @@
-import express from 'express'
 import dotenv from 'dotenv'
+import express from 'express'
 
-import { notFound, errorHandler } from '@shared/middleware/error.middleware'
+import { errorHandler, notFound } from '@shared/middleware/error.middleware'
 
 import { prisma } from '@shared/db/prisma/prisma'
 
-import {getTasksRoutes} from '@feature/index'
+import { getTasksRoutes, deleteTaskRoute } from '@feature/index'
 
 dotenv.config()
 
@@ -17,19 +17,22 @@ async function main() {
 	const PORT = process.env.port || 5000
 
 	app.use('/', getTasksRoutes)
-
+	app.use('/', deleteTaskRoute)
 
 	app.use(notFound)
 	app.use(errorHandler)
 
-	app.listen(PORT, () => console.log(`Server running in development mode in ${PORT} port`))
+	app.listen(PORT, () =>
+		console.log(`Server running in development mode in ${PORT} port`)
+	)
 }
 
-main().then(async () => {
-	await prisma.$disconnect()
-})
-.catch(async e => {
-	console.error(e)
-	await prisma.$disconnect()
-	process.exit(1)
-})
+main()
+	.then(async () => {
+		await prisma.$disconnect()
+	})
+	.catch(async e => {
+		console.error(e)
+		await prisma.$disconnect()
+		process.exit(1)
+	})
