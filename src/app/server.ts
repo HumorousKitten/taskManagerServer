@@ -18,6 +18,7 @@ async function main() {
 
 	app.use('/', getTasksRoutes)
 
+
 	app.use(notFound)
 	app.use(errorHandler)
 
