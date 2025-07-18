@@ -5,7 +5,7 @@ import { errorHandler, notFound } from '@shared/middleware/error.middleware'
 
 import { prisma } from '@shared/db/prisma/prisma'
 
-import { getTasksRoutes, deleteTaskRoute } from '@feature/index'
+import { taskRoutes} from '@feature/index'
 
 dotenv.config()
 
@@ -16,8 +16,8 @@ async function main() {
 
 	const PORT = process.env.port || 5000
 
-	app.use('/', getTasksRoutes)
-	app.use('/', deleteTaskRoute)
+	app.use('/', taskRoutes)
+
 
 	app.use(notFound)
 	app.use(errorHandler)

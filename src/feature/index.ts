@@ -1,2 +1,1 @@
-export {default as getTasksRoutes} from '@feature/getTasks/getTasks.routes'
-export {default as deleteTaskRoute} from '@feature/deleteTask/deleteTask.routes'
+export {default as taskRoutes} from './task.routes'
