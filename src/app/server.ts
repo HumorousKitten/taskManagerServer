@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import express from 'express'
+import cors from 'cors'
 
 import { errorHandler, notFound } from '@shared/middleware/error.middleware'
 
@@ -13,11 +14,11 @@ const app = express()
 
 async function main() {
 	app.use(express.json())
-
+	app.use(cors())
+	
 	const PORT = process.env.port || 5000
 
 	app.use('/', taskRoutes)
-
 
 	app.use(notFound)
 	app.use(errorHandler)

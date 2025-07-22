@@ -3,12 +3,13 @@ import asyncHandler from 'express-async-handler'
 
 import { getTasksQuery } from '@shared/lib/getTasksQuery/getTask.service'
 
-
 export const getTasks = asyncHandler(async (req: Request, res: Response) => {
-	const allowedParams = ['page, limit']
-	const hasInvalidQueries = Object.keys(req.query).some(param => !allowedParams.includes(param))
-
-	if(hasInvalidQueries){
+	const allowedParams = ['page', 'limit']
+	const hasInvalidQueries = Object.keys(req.query).some(
+		param => !allowedParams.includes(param)
+	)
+	
+	if (hasInvalidQueries) {
 		res.status(400)
 		throw new Error('Недопустимые параметры')
 	}
