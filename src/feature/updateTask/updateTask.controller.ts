@@ -17,7 +17,7 @@ export const updateTask = asyncHandler( async(req: Request, res: Response) => {
 		throw new Error('Неверный параметр')
 	}
 
-	const updatedTask = await updateTaskQuery(+id, data)
+	const updatedTask = await updateTaskQuery(+id, data.body)
 
 	res.json(updatedTask)
 })

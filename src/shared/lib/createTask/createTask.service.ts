@@ -1,5 +1,9 @@
 import { TaskEntity } from '@entities/index'
 import { prisma } from '@shared/db/prisma/prisma'
+import { EPriority } from '@prisma/client'
+import { ECategories } from '@prisma/client'
+
+import { getCategoryId } from '../getCategoryId/getCategoryId.service'
 
 interface IData {
 	title: string
@@ -8,6 +12,7 @@ interface IData {
 
 export const createTaskQuery = async (data: IData) => {
 	const taskService = new TaskEntity(data.title, data.status)
+
 
 	const newTask = await prisma.tasks.create({
 		data: data,
@@ -21,12 +26,16 @@ export const createTaskQuery = async (data: IData) => {
 
 			category: {
 				select: {
-					id: true,
 					name: true
 				}
 			}
 		}
 	})
 
-	return newTask
+	console.log(newTask)
+
+	return {
+		...newTask,
+		category: newTask.category?.name
+	}
 }
