@@ -14,8 +14,4 @@ export class TaskEntity {
 			throw new Error('Название задачи не может быть пустым')
 		}
 	}
-
-	rename(newTitle: string) {
-
-	} 
 }

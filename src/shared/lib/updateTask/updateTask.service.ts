@@ -38,12 +38,16 @@ export const updateTaskQuery = async (id: number, data: IData) => {
 
 			category: {
 				select: {
-					id: true,
 					name: true
 				}
 			}
 		}
 	})
 
-	return updatedTask
+	const newUpdatedTask = {
+		...updatedTask,
+		category: updatedTask.category?.name
+	}
+
+	return newUpdatedTask
 }

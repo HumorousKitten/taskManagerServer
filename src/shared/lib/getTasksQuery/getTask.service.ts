@@ -14,12 +14,17 @@ export const getTasksQuery = async (page: number, limit: number) => {
 
 			category: {
 				select: {
-					id: true,
 					name: true
 				}
 			}
 		}
 	})
 
-	return tasks
+
+	const newTasks = tasks.map(task => ({
+		...task,
+		category: task.category?.name
+	}))
+
+	return newTasks
 }

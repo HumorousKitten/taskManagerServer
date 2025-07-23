@@ -6,7 +6,7 @@ import { createTaskQuery } from '@shared/lib/createTask/createTask.service'
 export const createTask = asyncHandler( async(req: Request, res: Response) => {
 	const data = req.body
 
-	const newTask = await createTaskQuery(data)
+	const newTask = await createTaskQuery(data.body)
 
 	res.json(newTask)
 })

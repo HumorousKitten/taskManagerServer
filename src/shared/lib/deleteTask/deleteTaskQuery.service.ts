@@ -15,12 +15,14 @@ export const deleteTaskQuery = async (id: number) => {
 
 			category: {
 				select: {
-					id: true,
 					name: true
 				}
 			}
 		}
 	})
 
-	return task
+	return {
+		...task,
+		category: task.category?.name
+	}
 }
