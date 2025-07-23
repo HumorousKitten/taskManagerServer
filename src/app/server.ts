@@ -1,12 +1,12 @@
+import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
-import cors from 'cors'
 
 import { errorHandler, notFound } from '@shared/middleware/error.middleware'
 
 import { prisma } from '@shared/db/prisma/prisma'
 
-import { taskRoutes} from '@feature/index'
+import { taskRoutes } from '@feature/index'
 
 dotenv.config()
 
@@ -14,9 +14,16 @@ const app = express()
 
 async function main() {
 	app.use(express.json())
-	app.use(cors())
-	
 	const PORT = process.env.port || 5000
+	const allowedOrigin = `http://localhost:${PORT}`
+
+	app.use(
+		cors({
+			origin: allowedOrigin,
+			credentials: true
+		})
+	)
+
 
 	app.use('/', taskRoutes)
 
